@@ -12,6 +12,12 @@ class Board
     @squares[j][i] = symbol
   end
 
+  def draw?
+    @squares.reduce(true) do |result, row|
+      result && row.reduce(true) { |row_result, square| row_result && square != '' }
+    end
+  end
+
   def print_board
     padding = 1
     hz_line = "\n  " + '-' * ((2 + padding * 2) * 3 + 1)

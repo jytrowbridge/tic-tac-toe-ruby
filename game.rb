@@ -58,8 +58,12 @@ class Game
 
       add_move(move, player)
       if player.player_won?
-        puts "Player #{player_toggle + 1 } won!"
+        puts "Player #{player_toggle + 1} won!"
         @board.print_board
+        return
+      end
+      if @board.draw?
+        puts 'Game is a draw'
         return
       end
       @board.print_board
