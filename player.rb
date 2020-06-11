@@ -12,12 +12,27 @@ class Player
   end
 
   def player_won?
-    # Check each row:
+    row_win? || col_win? || diag_win?
+  end
+
+  def arr_and(arr)
+    arr.reduce(true) { |result, current| current && result }
+  end
+
+  def diag_win?
+    diag_one = [@board[0][0], @board[1][1], @board[2][2]]
+    diag_two = [@board[2][0], @board[1][1], @board[0][2]]
+    arr_and(diag_one) || arr_and(diag_two)
+  end
+
+  def row_win?
     @board.each do |row|
       return true if arr_and(row)
     end
+    false
+  end
 
-    # Check each column:
+  def col_win?
     (0..2).to_a.each do |col_num|
       col = []
       @board.each do |row|
@@ -25,17 +40,9 @@ class Player
       end
       return true if arr_and(col)
     end
-
-    # Check diagonals:
-    diag_one = [@board[0][0], @board[1][1], @board[2][2]]
-    diag_two = [@board[2][0], @board[1][1], @board[0][2]]
-    return arr_and(diag_one) || arr_and(diag_two)
+    false
   end
 
-  private
-
-  def arr_and(arr)
-    arr.reduce(true) { |result, current| current && result }
-  end
+  private :arr_and, :row_win?, :col_win?, :diag_win?
 
 end

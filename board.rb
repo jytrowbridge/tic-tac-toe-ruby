@@ -4,7 +4,6 @@ class Board
   end
 
   def move_avail?(i, j)
-    # @moves_avail.include?(move)
     @squares[j][i] == ''
   end
 
